@@ -1,14 +1,17 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { validate } from 'class-validator';
-import { CreateUserDto } from 'src/dto/create-user.dto';
-import { UserEntity } from './user.entity';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserEntity } from '../entities/User.entity';
 
 @Injectable()
 export class UserService {
-  //   async users(createUserDto: CreateUserDto) {
-  async users() {
-    const users = await UserEntity.createQueryBuilder('user').getMany();
+  constructor(
+    @InjectRepository(UserEntity)
+    private userRepository: Repository<UserEntity>,
+  ) {}
 
-    return users;
+  //유저 전체를 가져옴
+  users(): Promise<UserEntity[]> {
+    return this.userRepository.createQueryBuilder('user').getMany();
   }
 }
