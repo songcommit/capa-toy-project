@@ -28,7 +28,6 @@ import { UserModule } from './user/user.module';
       entities: ['./entities/**/*.js'],
       synchronize: true,
     }),
-    // CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
