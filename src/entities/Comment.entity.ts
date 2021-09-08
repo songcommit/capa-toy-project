@@ -10,6 +10,7 @@ import {
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { PostEntity } from 'src/entities/post.entity';
 
+@ObjectType()
 @Entity()
 export class CommentEntity {
   @PrimaryGeneratedColumn()

@@ -11,6 +11,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { UserEntity } from './User.entity';
 import { CommentEntity } from './Comment.entity';
 
+@ObjectType()
 @Entity()
 export class PostEntity {
   @PrimaryGeneratedColumn()
@@ -21,6 +22,9 @@ export class PostEntity {
 
   @Column()
   contents: string;
+
+  @Column()
+  rfc: string;
 
   @ManyToOne(() => UserEntity, (user) => user.post)
   user: UserEntity;

@@ -3,13 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { Connection, createConnection, getConnectionManager } from 'typeorm';
-import { UserEntity } from './entities/User.entity';
-import { PostEntity } from './entities/Post.entity';
-// import { CommentEntity } from './entities/Comment.entity';
-import { PostModule } from './post/post.module';
-import { UserModule } from './user/user.module';
-// import { CommentModule } from './comment/comment.module';
+import { Connection } from 'typeorm';
 
 @Module({
   imports: [
