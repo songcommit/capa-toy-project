@@ -7,25 +7,21 @@ import {
   UpdateDateColumn,
   OneToMany,
   DeleteDateColumn,
+  BaseEntity,
 } from 'typeorm';
 import { PostEntity } from './Post.entity';
 
-@ObjectType()
 @Entity()
-export class UserEntity {
-  @Field(() => Number)
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => String) // nest(gql)
   @Column()
   email: string;
 
-  @Field(() => String) // nest(gql)
   @Column()
   password: string;
 
-  @Field(() => String) // nest(gql)
   @Column()
   nickname: string;
 

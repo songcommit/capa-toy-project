@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type PostObject {
+  id: Float!
+  title: String!
+  contents: String!
+  rfc: String!
+}
+
+type UserObject {
+  id: Float!
+  email: String!
+  nickname: String!
+}
+
+type Query {
+  allUser: [UserObject!]!
+  allPost: [PostObject!]!
+}

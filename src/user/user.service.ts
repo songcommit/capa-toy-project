@@ -1,21 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { UserEntity } from 'src/entities/User.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserObject } from './dto/user.object';
 import { UserRepository } from './user.repository';
 
 @Injectable()
 export class UserService {
-  // userRepository = new UserRepository();
-  // constructor(
-  //   @InjectRepository(UserEntity)
-  //   userRepository: Repository<UserEntity>,
-  // ) {
-  //   // 이게 숨겨져 있슴
-  //   this.userRepository = userRepository;
-  // }
+  constructor(
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
+  ) {}
 
-  constructor(private userRepository: UserRepository) {}
-
-  async allUser(): Promise<UserEntity[]> {
+  async allUser(): Promise<UserObject[]> {
     return this.userRepository.allUser();
   }
 }

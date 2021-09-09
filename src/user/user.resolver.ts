@@ -1,21 +1,15 @@
-import {
-  Resolver,
-  Query,
-  Args,
-  Int,
-  ResolveField,
-  Parent,
-  Mutation,
-} from '@nestjs/graphql';
-import { UserEntity } from '../entities/User.entity';
+import { Resolver, Query } from '@nestjs/graphql';
+import { UserObject } from './dto/user.object';
 import { UserService } from './user.service';
 
-@Resolver(() => UserEntity)
+@Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  // @Query(() => [UserEntity])
-  // async users() {
-  //   return this.userService.allPost();
-  // }
+  @Query(() => [UserObject])
+  async allUser(): Promise<UserObject[]> {
+    // 타입스크립트를 위함 : Boolean은 옵션
+    // return this.userService.allUser();
+    return null;
+  }
 }

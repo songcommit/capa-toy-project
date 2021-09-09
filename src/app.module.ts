@@ -4,13 +4,20 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { Connection } from 'typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
+import { PostModule } from './post/post.module';
+import { UserModule } from './user/user.module';
+import { UserEntity } from './entities/User.entity';
+import { PostEntity } from './entities/Post.entity';
 
 @Module({
   imports: [
-    // GraphQLModule.forRoot({
-    //   debug: false,
-    //   playground: true,
-    // }),
+    GraphQLModule.forRoot({
+      debug: true,
+      playground: true,
+      installSubscriptionHandlers: true,
+      autoSchemaFile: 'schema.gql',
+    }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -19,10 +26,13 @@ import { Connection } from 'typeorm';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: ['./entities/**/*.js'],
+      entities: [UserEntity, PostEntity],
       synchronize: true,
     }),
+    UserModule,
+    PostModule,
   ],
+
   controllers: [AppController],
   providers: [AppService],
 })

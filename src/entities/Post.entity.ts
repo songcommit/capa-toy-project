@@ -7,11 +7,9 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
 } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { ObjectType } from '@nestjs/graphql';
 import { UserEntity } from './User.entity';
-import { CommentEntity } from './Comment.entity';
 
-@ObjectType()
 @Entity()
 export class PostEntity {
   @PrimaryGeneratedColumn()
@@ -28,9 +26,6 @@ export class PostEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.post)
   user: UserEntity;
-
-  @OneToMany((type) => CommentEntity, (comment) => comment.post)
-  comment: CommentEntity[];
 
   @CreateDateColumn()
   createdAt: Date;
