@@ -2,14 +2,14 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class UserObject {
-  @Field()
+  @Field({ nullable: true })
   id: number;
 
-  @Field()
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
-  nickname: string;
+  @Field({ nullable: true })
+  password: string;
 
   // @Field((type) => [PostObject])
   // post: PostObject[];

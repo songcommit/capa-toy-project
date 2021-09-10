@@ -5,21 +5,19 @@ import { CreateUserInput } from './dto/create-user-Input';
 import { UserObject } from './dto/user.object';
 import { UserRepository } from './user.repository';
 
-@Injectable()
+@Injectable() //객체를 만들어낸다. 즉 인스턴스화에서 메모리에 올린다.
 export class UserService {
   private logger: Logger;
   constructor(
-    @InjectRepository(UserRepository)
+    // @InjectRepository(UserRepository)
     private userRepository: UserRepository,
   ) {
     this.logger = new Logger('UserService');
   }
 
-  async findOne(email: string, password: string): Promise<UserObject> {
+  async userFindOne(email: string): Promise<UserObject> {
     try {
-      await this.userRepository
-        .createQueryBuilder('user')
-        .where('user.email = :email');
+      return await this.userRepository.userFindOne(email);
     } catch (e) {
       this.logger.error('findOne Error', e);
       return null;

@@ -9,5 +9,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 @Module({
   imports: [TypeOrmModule.forFeature([UserRepository])],
   providers: [UserService, UserResolver],
+  controllers: [],
 })
 export class UserModule {}

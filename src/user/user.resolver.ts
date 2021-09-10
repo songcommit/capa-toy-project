@@ -32,4 +32,15 @@ export class UserResolver {
       return false;
     }
   }
+
+  @Query(() => UserObject)
+  async findOneUser(@Args('email') email: string) {
+    try {
+      const user = await this.userService.userFindOne(email);
+      return user;
+    } catch (e) {
+      console.log('findOneUser Error:', e);
+      return null;
+    }
+  }
 }
