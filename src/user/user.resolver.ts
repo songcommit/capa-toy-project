@@ -16,7 +16,7 @@ export class UserResolver {
     @Args('createUserInput') createUserInput: CreateUserInput,
   ): Promise<boolean> {
     try {
-      const { email, password } = createUserInput;
+      const { email } = createUserInput;
 
       const isEmail = await this.userService.isEmail(email);
 
@@ -27,8 +27,6 @@ export class UserResolver {
       } else {
         return false;
       }
-
-      console.log('isEmail: ', isEmail);
     } catch (e) {
       console.log('createUser Error: ', e);
       return false;
