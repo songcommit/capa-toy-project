@@ -1,4 +1,4 @@
-import { PostEntity } from '../entities/Post.entity';
+import { PostEntity } from 'src/entities/post.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { PostObject } from './dto/post.object';
 

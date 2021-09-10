@@ -9,13 +9,15 @@ type PostObject {
   rfc: String!
 }
 
-type UserObject {
-  id: Float!
-  email: String!
-  nickname: String!
+type Query {
+  allPost: [PostObject!]!
 }
 
-type Query {
-  allUser: [UserObject!]!
-  allPost: [PostObject!]!
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): Boolean!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
 }

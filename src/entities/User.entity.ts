@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import { createHmac } from 'crypto';
 import {
   Column,
   Entity,
@@ -8,8 +9,11 @@ import {
   OneToMany,
   DeleteDateColumn,
   BaseEntity,
+  AfterLoad,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
-import { PostEntity } from './Post.entity';
+import { PostEntity } from './post.entity';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -22,8 +26,18 @@ export class UserEntity extends BaseEntity {
   @Column()
   password: string;
 
-  @Column()
-  nickname: string;
+  private tempPassword: string;
+  @AfterLoad()
+  private loadTempPassword(): void {
+    this.tempPassword = this.password;
+  }
+  @BeforeInsert()
+  @BeforeUpdate()
+  private encryptPassword(): void {
+    if (this.tempPassword !== this.password) {
+      this.password = createHmac('sha256', this.password).digest('hex');
+    }
+  }
 
   @OneToMany(() => PostEntity, (post) => post.user)
   post: PostEntity[];

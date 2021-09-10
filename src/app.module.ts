@@ -5,10 +5,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { Connection } from 'typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { PostModule } from './post/post.module';
 import { UserModule } from './user/user.module';
-import { UserEntity } from './entities/User.entity';
-import { PostEntity } from './entities/Post.entity';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -26,8 +24,9 @@ import { PostEntity } from './entities/Post.entity';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [UserEntity, PostEntity],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: true,
     }),
     UserModule,
     PostModule,

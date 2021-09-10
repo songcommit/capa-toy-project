@@ -8,7 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ObjectType } from '@nestjs/graphql';
-import { UserEntity } from './User.entity';
+import { UserEntity } from './user.entity';
 
 @Entity()
 export class PostEntity {
