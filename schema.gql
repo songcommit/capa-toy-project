@@ -8,17 +8,9 @@ type UserObject {
   password: String
 }
 
-type PostObject {
-  id: Float!
-  title: String!
-  contents: String!
-  rfc: String!
-}
-
 type Query {
   findOneUser(data: FindOneUserInput!): UserObject!
-  allPost: [PostObject!]!
-  validateUser(data: AuthDTO!): String!
+  login(data: AuthDTO!): String!
 }
 
 input FindOneUserInput {
@@ -33,9 +25,14 @@ input AuthDTO {
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): Boolean!
+  createPost(data: CreatePostInputDTO!): Boolean!
 }
 
 input CreateUserInput {
   email: String!
   password: String!
+}
+
+input CreatePostInputDTO {
+  title: String!
 }

@@ -6,30 +6,31 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   OneToMany,
+  BaseEntity,
 } from 'typeorm';
 import { ObjectType } from '@nestjs/graphql';
 import { UserEntity } from './user.entity';
 
 @Entity()
-export class PostEntity {
+export class PostEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   contents: string;
 
-  @Column()
+  @Column({ nullable: true })
   rfc: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.post)
+  @ManyToOne(() => UserEntity, (user) => user.post, { nullable: true })
   user: UserEntity;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ nullable: true })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ nullable: true })
   updatedAt: Date;
 }

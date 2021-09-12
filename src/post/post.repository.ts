@@ -4,7 +4,14 @@ import { PostObject } from './dto/post.object';
 
 @EntityRepository(PostEntity)
 export class PostRepository extends Repository<PostEntity> {
-  async allPost(): Promise<PostObject[]> {
-    return await this.createQueryBuilder('post').getMany();
+  async createPost(title: string): Promise<boolean> {
+    try {
+      await this.create({ title: title }).save();
+
+      return true;
+    } catch (e) {
+      console.log('allPost Error: ', e);
+      return false;
+    }
   }
 }

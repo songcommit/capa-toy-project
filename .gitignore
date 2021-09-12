@@ -177,4 +177,6 @@ _.code-workspace
 .history
 .ionide
 
+src/auth/jwtContans.ts
+
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode

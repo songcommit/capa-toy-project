@@ -8,6 +8,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { UserModule } from './user/user.module';
 import { PostModule } from './post/post.module';
 import { AuthModule } from './auth/auth.module';
+import { GqlAuthGuard } from './gql-auth-guard/gql-auth-guard.service';
 
 @Module({
   imports: [
@@ -16,6 +17,15 @@ import { AuthModule } from './auth/auth.module';
       playground: true,
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
+
+      context: ({ req, connection }) => {
+        if (req) {
+          const user = req.headers.authorization;
+          return { ...req, user };
+        } else {
+          return connection;
+        }
+      },
     }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
@@ -35,7 +45,7 @@ import { AuthModule } from './auth/auth.module';
   ],
 
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GqlAuthGuard],
 })
 export class AppModule {
   constructor(private connection: Connection) {}
