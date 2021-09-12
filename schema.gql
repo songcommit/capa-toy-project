@@ -8,8 +8,16 @@ type UserObject {
   password: String
 }
 
+type PostObject {
+  id: Float!
+  title: String!
+  contents: String!
+  rfc: String!
+}
+
 type Query {
   findOneUser(data: FindOneUserInput!): UserObject!
+  post(postId: Float!): PostObject!
   login(data: AuthDTO!): String!
 }
 

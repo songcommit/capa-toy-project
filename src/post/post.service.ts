@@ -33,4 +33,15 @@ export class PostService {
     console.log('updatePost result: ', result);
     return true;
   }
+
+  async post(postId: number): Promise<PostObject> {
+    try {
+      const post = await this.postRepository.post(postId);
+
+      return post;
+    } catch (e) {
+      console.log('post Error: ', e);
+      return null;
+    }
+  }
 }

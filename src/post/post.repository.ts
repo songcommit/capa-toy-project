@@ -78,4 +78,10 @@ export class PostRepository extends Repository<PostEntity> {
       return false;
     }
   }
+
+  async post(postId: number) {
+    const post = await this.findOne({ id: postId });
+
+    return post;
+  }
 }

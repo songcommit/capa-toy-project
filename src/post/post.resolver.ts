@@ -4,6 +4,7 @@ import { CurrentUser } from 'src/auth/auth.context';
 import { UserEntity } from 'src/entities/user.entity';
 import { GqlAuthGuard } from 'src/gql-auth-guard/gql-auth-guard.service';
 import { CreatePostInputDTO } from './dto/create-post-input.dto';
+import { PostObject } from './dto/post.object';
 import { UpdatePostInput } from './dto/update-post-input.dto';
 import { PostService } from './post.service';
 
@@ -40,6 +41,18 @@ export class PostResolver {
     } catch (e) {
       this.logger.error('updatePost: ', e);
       return false;
+    }
+  }
+
+  @Query(() => PostObject)
+  async post(@Args('postId') postId: number) {
+    try {
+      const post = await this.postService.post(postId);
+
+      return post;
+    } catch (e) {
+      console.log('post Error', e);
+      return null;
     }
   }
 }
