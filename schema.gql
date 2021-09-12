@@ -16,8 +16,19 @@ type PostObject {
 }
 
 type Query {
-  findOneUser(email: String!): UserObject!
+  findOneUser(data: FindOneUserInput!): UserObject!
   allPost: [PostObject!]!
+  validateUser(data: AuthDTO!): String!
+}
+
+input FindOneUserInput {
+  email: String!
+  password: String!
+}
+
+input AuthDTO {
+  email: String!
+  password: String!
 }
 
 type Mutation {

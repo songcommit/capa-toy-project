@@ -2,6 +2,7 @@ import { UserEntity } from '../entities/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { Logger } from '@nestjs/common';
 import { UserObject } from './dto/user.object';
+import { createHmac } from 'crypto';
 
 @EntityRepository(UserEntity) //@EntityRepository(UserEntity)안의 내장 함수중 FunctionConstructor를 통해서 객체가 생성된다.
 export class UserRepository extends Repository<UserEntity> {
@@ -17,12 +18,14 @@ export class UserRepository extends Repository<UserEntity> {
     return true;
   }
 
-  async userFindOne(email: string): Promise<UserObject> {
-    console.log(
-      'this.findOne({ email: email }): ',
-      this.findOne({ email: email }),
-    );
-    return await this.findOne({ email: email });
+  async userFindOne(email: string, password: string): Promise<UserObject> {
+    const user = await this.findOne({ email });
+
+    if (user.password !== createHmac('sha256', password).digest('hex')) {
+      throw new Error('Invalid password.');
+    }
+
+    return user;
   }
 
   async createUser(email: string, password: string): Promise<boolean> {

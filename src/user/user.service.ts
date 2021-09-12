@@ -15,9 +15,9 @@ export class UserService {
     this.logger = new Logger('UserService');
   }
 
-  async userFindOne(email: string): Promise<UserObject> {
+  async userFindOne(email: string, passowrd: string): Promise<UserObject> {
     try {
-      return await this.userRepository.userFindOne(email);
+      return await this.userRepository.userFindOne(email, passowrd);
     } catch (e) {
       this.logger.error('findOne Error', e);
       return null;
