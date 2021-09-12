@@ -11,9 +11,26 @@ export class PostService {
     private postRepository: PostRepository,
   ) {}
 
-  async createPost(createPostDTO: CreatePostInputDTO): Promise<boolean> {
-    const { title } = createPostDTO;
-    await this.postRepository.createPost(title);
+  async createPost(
+    title: string,
+    contents: string,
+    userId: number,
+  ): Promise<boolean> {
+    await this.postRepository.createPost(title, contents, userId);
+    return true;
+  }
+
+  async updatePost(
+    postId: number,
+    title: string,
+    contents: string,
+  ): Promise<boolean> {
+    const result = await this.postRepository.updatePost(
+      postId,
+      title,
+      contents,
+    );
+    console.log('updatePost result: ', result);
     return true;
   }
 }

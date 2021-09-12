@@ -19,18 +19,18 @@ export class PostEntity extends BaseEntity {
   @Column()
   title: string;
 
-  @Column({ nullable: true })
+  @Column()
   contents: string;
 
-  @Column({ nullable: true })
+  @Column()
   rfc: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.post, { nullable: true })
+  @ManyToOne(() => UserEntity, (user) => user.post)
   user: UserEntity;
 
-  @CreateDateColumn({ nullable: true })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ nullable: true })
+  @UpdateDateColumn()
   updatedAt: Date;
 }

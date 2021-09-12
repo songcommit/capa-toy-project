@@ -26,6 +26,7 @@ input AuthDTO {
 type Mutation {
   createUser(createUserInput: CreateUserInput!): Boolean!
   createPost(data: CreatePostInputDTO!): Boolean!
+  updatePost(data: UpdatePostInput!): Boolean!
 }
 
 input CreateUserInput {
@@ -35,4 +36,11 @@ input CreateUserInput {
 
 input CreatePostInputDTO {
   title: String!
+  contents: String!
+}
+
+input UpdatePostInput {
+  id: Int!
+  title: String!
+  contents: String!
 }

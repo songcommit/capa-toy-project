@@ -4,4 +4,7 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreatePostInputDTO {
   @Field()
   title: string;
+
+  @Field()
+  contents: string;
 }
