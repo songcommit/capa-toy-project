@@ -25,6 +25,9 @@ export class PostEntity extends BaseEntity {
   @Column()
   rfc: string;
 
+  @Column()
+  rss: string;
+
   @ManyToOne(() => UserEntity, (user) => user.post)
   user: UserEntity;
 

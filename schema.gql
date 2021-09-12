@@ -35,6 +35,7 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): Boolean!
   createPost(data: CreatePostInputDTO!): Boolean!
   updatePost(data: UpdatePostInput!): Boolean!
+  deletePost(postId: Float!): Boolean!
 }
 
 input CreateUserInput {

@@ -24,11 +24,13 @@ export class PostService {
     postId: number,
     title: string,
     contents: string,
+    userId: number,
   ): Promise<boolean> {
     const result = await this.postRepository.updatePost(
       postId,
       title,
       contents,
+      userId,
     );
     console.log('updatePost result: ', result);
     return true;
@@ -42,6 +44,16 @@ export class PostService {
     } catch (e) {
       console.log('post Error: ', e);
       return null;
+    }
+  }
+
+  async deletePost(postId: number): Promise<Boolean> {
+    try {
+      await this.postRepository.deletePost(postId);
+      return true;
+    } catch (e) {
+      console.log('deletePost Error: ', e);
+      return false;
     }
   }
 }

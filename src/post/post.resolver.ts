@@ -32,11 +32,15 @@ export class PostResolver {
 
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Boolean)
-  async updatePost(@Args('data') data: UpdatePostInput) {
+  async updatePost(
+    @Args('data') data: UpdatePostInput,
+    @CurrentUser() user: UserEntity,
+  ) {
     try {
       const { id, title, contents } = data;
+      const userId = user.id;
 
-      await this.postService.updatePost(id, title, contents);
+      await this.postService.updatePost(id, title, contents, userId);
       return true;
     } catch (e) {
       this.logger.error('updatePost: ', e);
@@ -53,6 +57,18 @@ export class PostResolver {
     } catch (e) {
       console.log('post Error', e);
       return null;
+    }
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => Boolean)
+  async deletePost(@Args('postId') postId: number) {
+    try {
+      await this.postService.deletePost(postId);
+      return true;
+    } catch (e) {
+      this.logger.error('deletePost Error: ', e);
+      return false;
     }
   }
 }
