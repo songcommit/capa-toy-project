@@ -10,6 +10,7 @@ import { PostModule } from './post/post.module';
 import { AuthModule } from './auth/auth.module';
 import { GqlAuthGuard } from './gql-auth-guard/gql-auth-guard.service';
 
+//app module
 @Module({
   imports: [
     GraphQLModule.forRoot({
