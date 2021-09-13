@@ -1,6 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { validate } from 'class-validator';
 import { CreateUserInput } from './dto/create-user-Input';
 import { UserObject } from './dto/user.object';
 import { UserRepository } from './user.repository';
@@ -39,7 +37,12 @@ export class UserService {
     try {
       const { email, password } = CreateUserInput;
 
-      await this.userRepository.createUser(email, password);
+      const isExist = await this.userRepository.isExist(email);
+
+      if (!isExist) {
+        await this.userRepository.createUser(email, password);
+      }
+
       return true;
     } catch (e) {
       console.log('createUser Error: ', e);
