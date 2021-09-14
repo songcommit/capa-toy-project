@@ -13,9 +13,9 @@ export class UserRepository extends Repository<UserEntity> {
   }
 
   async isExist(email: string): Promise<boolean> {
-    const isExist = await this.findOne({ email: email });
+    const isExist: UserEntity = await this.findOne({ email: email });
 
-    if (!isExist) {
+    if (isExist == null || isExist == undefined) {
       return false;
     }
     return true;
