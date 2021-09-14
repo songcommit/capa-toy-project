@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { env } from 'process';
 import { UserRepository } from 'src/user/user.repository';
+import { Payload } from './interface';
 import { jwtConstants } from './jwtContans';
 
 @Injectable()
@@ -23,7 +24,7 @@ export class AuthService {
       const { ...result } = user;
       this.logger.log('validateUser Result: ', result);
 
-      const payload = { username: user.email, sub: user.id };
+      const payload: Payload = { username: user.email, sub: user.id };
 
       return this.jwtService.sign(payload);
     }
